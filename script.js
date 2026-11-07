@@ -117,7 +117,7 @@ function report(){
   [pct===100?'ما شاء الله، يوم كامل. ربنا يتقبل منك':pct>=50?'شد حيلك، فاضل القليل النهارده':'لسه فيه وقت تكمل يومك، يلا',''] ];
  repText=line.map(l=>l[0]+l[1]).join('\n');
  const e=$('#rep');e.innerHTML='';
- line.forEach((l,i)=>{const r=document.createElement('div');if(i===0){r.style.cssText='font:700 18px "Reem Kufi",sans-serif;color:var(--gold)';r.textContent=l[0]}else{if(l[1]){const b=document.createElement('b');b.textContent=l[0];r.append(b,l[1])}else r.textContent=l[0]}e.append(r)})
+ line.forEach((l,i)=>{const r=document.createElement('div');if(i===0){r.style.cssText='font:700 18px Tahoma,Arial,sans-serif;color:var(--gold)';r.textContent=l[0]}else{if(l[1]){const b=document.createElement('b');b.textContent=l[0];r.append(b,l[1])}else r.textContent=l[0]}e.append(r)})
 }
 function chips(){
  const T=pt(new Date());
