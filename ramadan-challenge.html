@@ -55,8 +55,25 @@ h2{font:700 22px Tahoma,Arial,sans-serif;margin:0 0 12px;color:var(--gold)}
 .chip.on::before{content:"✓"}
 .pop{animation:pop .45s ease}
 @keyframes pop{40%{transform:scale(1.28);box-shadow:0 0 0 8px #e6b65555}}
-.rep{white-space:pre-line;line-height:2}
-.rep b{color:var(--gold)}
+.rep{line-height:1.5}
+.rh{display:flex;justify-content:space-between;align-items:center;font-size:17px}
+.rh b{color:var(--gold)}
+.rb{display:flex;gap:6px}.rf{background:var(--line);color:var(--ink)}
+.rp{font-weight:700;background:var(--acc);color:#fff;border-radius:20px;padding:1px 12px;font-size:14px}
+.rbar{background:var(--line);margin:8px 0 10px;height:6px}
+.rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.rt{border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+.rtt{display:flex;justify-content:space-between;font-size:14px}
+.rtt b{color:var(--gold);font-size:16px}
+.rd{display:flex;gap:5px;margin:6px 0 3px}
+.rd i{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--line);flex:none}
+.rd i.on{background:var(--acc);border-color:var(--acc)}
+.rt small{display:block;color:var(--mut);font-size:12px}
+.rs{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.rc{flex:1;min-width:120px;background:var(--bg);border-radius:10px;padding:6px 10px;font-size:13px}
+.rc small{display:block;color:var(--mut)}
+.rc b{font-weight:500}
+.rm{margin:8px 0 0;font-size:14px;color:var(--mut)}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .btn{background:var(--gold);color:#1b2440;border:0;border-radius:12px;padding:8px 18px;font-weight:700}
 .btn.o{background:transparent;color:var(--ink);border:1px solid var(--line)}
@@ -307,7 +324,16 @@ function report(){
   [pct===100?'ما شاء الله، يوم كامل. ربنا يتقبل منك':pct>=50?'شد حيلك، فاضل القليل النهارده':'لسه فيه وقت تكمل يومك، يلا',''] ];
  repText=line.map(l=>l[0]+l[1]).join('\n');
  const e=$('#rep');e.innerHTML='';
- line.forEach((l,i)=>{const r=document.createElement('div');if(i===0){r.style.cssText='font:700 18px Tahoma,Arial,sans-serif;color:var(--gold)';r.textContent=l[0]}else{if(l[1]){const b=document.createElement('b');b.textContent=l[0];r.append(b,l[1])}else r.textContent=l[0]}e.append(r)})
+ const mk=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;return n};
+ const hd=mk('div','rh');const bw=mk('span','rb');bw.append(mk('span','rp rf','🔥 '+streak(d)),mk('span','rp',pct+'%'));hd.append(mk('b','','يوم '+(d+1)+' رمضان'+(S.name?' - '+S.name:'')),bw);
+ const bar=mk('div','pb rbar'),bi=mk('i');bi.style.width=pct+'%';bar.append(bi);
+ const grid=mk('div','rg');
+ const tile=(nm,o,Ls,n)=>{const t=mk('div','rt'),top=mk('div','rtt'),ds=mk('div','rd'),ms=Ls.filter((x,i)=>!g(d,o+i));top.append(mk('span','',nm),mk('b','',n+'/5'));Ls.forEach((x,i)=>{const dt=mk('i',g(d,o+i)?'on':'');dt.title=x;dt.setAttribute('aria-label',x+(g(d,o+i)?' تم':' لم يتم'));ds.append(dt)});t.append(top,ds,mk('small','',ms.length===0?'مكتمل ✓':ms.length===Ls.length?'لسه ما بدأت':'ناقص: '+ms.join('، ')));return t};
+ grid.append(tile('الصلوات',0,PR,a),tile('الورد',5,PR,b),tile('أعمال صالحة',10,EX,cnt(d,d+1,10,15)));
+ const pgt=mk('div','rt'),pgh=mk('div','rtt');pgh.append(mk('span','','الصفحات'),mk('b','',String(S.pg[d]||0)));pgt.append(pgh,mk('small','','من 604 للختمة كلها'));grid.append(pgt);
+ const sb=mk('div','rs');
+ [['الأسبوع',wp+'/'+(w1-w0)*5+' صلاة، '+ww+'/'+(w1-w0)*5+' ورد'],['الإجمالي',P+'/145 صلاة، '+(W*30/145).toFixed(1)+'/30 جزء']].forEach(([k,v])=>{const c=mk('div','rc');c.append(mk('small','',k),mk('b','',v));sb.append(c)});
+ e.append(hd,bar,grid,sb,mk('p','rm',line[line.length-1][0]))
 }
 function chips(){
  const T=pt(new Date());
@@ -366,7 +392,7 @@ $('#sd').value=S.start||'';
 $('#sd').onchange=()=>{S.start=$('#sd').value;save();autoDay();chips();update();toast('تم ضبط أول يوم في رمضان')};
 $('#ex').onclick=async()=>{const t=JSON.stringify(S);$('#bk').value=t;try{await navigator.clipboard.writeText(t)}catch(e){$('#bk').select()}toast('تم نسخ النسخة الاحتياطية، احفظها في مكان آمن')};
 $('#im').onclick=()=>{try{const o=JSON.parse($('#bk').value);if(typeof o.p!=='string'||o.p.length!==K*N)throw 0;S=Object.assign(S,o);save();setTheme(S.theme||'dark');$('#sd').value=S.start||'';$('#hi').textContent=S.name?'أهلاً يا '+S.name:'';setDay(S.day);toast('تم استرجاع التقدّم')}catch(e){toast('النسخة غير صالحة، انسخها كاملة وجرّب تاني')}};
-$('#pgi').oninput=()=>{const v=Math.max(0,Math.min(604,Math.floor(+$('#pgi').value||0)));if(v)S.pg[S.day]=v;else delete S.pg[S.day];save();kh()};
+$('#pgi').oninput=()=>{const v=Math.max(0,Math.min(604,Math.floor(+$('#pgi').value||0)));if(v)S.pg[S.day]=v;else delete S.pg[S.day];save();kh();report()};
 function ayR(){let i;do{i=Math.floor(Math.random()*AY.length)}while(i===ayI);ayI=i;S.ayl=i;save();const p=$('#ayt'),s=$('#ays');p.style.opacity=0;s.style.opacity=0;setTimeout(()=>{p.textContent=AY[i][0];s.textContent=AY[i][1];p.style.opacity=1;s.style.opacity=1},500)}
 setInterval(ayR,45000);
 autoDay();chips();update();cdn();setInterval(cdn,1000);
