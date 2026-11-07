@@ -117,7 +117,16 @@ function report(){
   [pct===100?'ما شاء الله، يوم كامل. ربنا يتقبل منك':pct>=50?'شد حيلك، فاضل القليل النهارده':'لسه فيه وقت تكمل يومك، يلا',''] ];
  repText=line.map(l=>l[0]+l[1]).join('\n');
  const e=$('#rep');e.innerHTML='';
- line.forEach((l,i)=>{const r=document.createElement('div');if(i===0){r.style.cssText='font:700 18px Tahoma,Arial,sans-serif;color:var(--gold)';r.textContent=l[0]}else{if(l[1]){const b=document.createElement('b');b.textContent=l[0];r.append(b,l[1])}else r.textContent=l[0]}e.append(r)})
+ const mk=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;return n};
+ const hd=mk('div','rh');const bw=mk('span','rb');bw.append(mk('span','rp rf','🔥 '+streak(d)),mk('span','rp',pct+'%'));hd.append(mk('b','','يوم '+(d+1)+' رمضان'+(S.name?' - '+S.name:'')),bw);
+ const bar=mk('div','pb rbar'),bi=mk('i');bi.style.width=pct+'%';bar.append(bi);
+ const grid=mk('div','rg');
+ const tile=(nm,o,Ls,n)=>{const t=mk('div','rt'),top=mk('div','rtt'),ds=mk('div','rd'),ms=Ls.filter((x,i)=>!g(d,o+i));top.append(mk('span','',nm),mk('b','',n+'/5'));Ls.forEach((x,i)=>{const dt=mk('i',g(d,o+i)?'on':'');dt.title=x;dt.setAttribute('aria-label',x+(g(d,o+i)?' تم':' لم يتم'));ds.append(dt)});t.append(top,ds,mk('small','',ms.length===0?'مكتمل ✓':ms.length===Ls.length?'لسه ما بدأت':'ناقص: '+ms.join('، ')));return t};
+ grid.append(tile('الصلوات',0,PR,a),tile('الورد',5,PR,b),tile('أعمال صالحة',10,EX,cnt(d,d+1,10,15)));
+ const pgt=mk('div','rt'),pgh=mk('div','rtt');pgh.append(mk('span','','الصفحات'),mk('b','',String(S.pg[d]||0)));pgt.append(pgh,mk('small','','من 604 للختمة كلها'));grid.append(pgt);
+ const sb=mk('div','rs');
+ [['الأسبوع',wp+'/'+(w1-w0)*5+' صلاة، '+ww+'/'+(w1-w0)*5+' ورد'],['الإجمالي',P+'/145 صلاة، '+(W*30/145).toFixed(1)+'/30 جزء']].forEach(([k,v])=>{const c=mk('div','rc');c.append(mk('small','',k),mk('b','',v));sb.append(c)});
+ e.append(hd,bar,grid,sb,mk('p','rm',line[line.length-1][0]))
 }
 function chips(){
  const T=pt(new Date());
@@ -176,7 +185,7 @@ $('#sd').value=S.start||'';
 $('#sd').onchange=()=>{S.start=$('#sd').value;save();autoDay();chips();update();toast('تم ضبط أول يوم في رمضان')};
 $('#ex').onclick=async()=>{const t=JSON.stringify(S);$('#bk').value=t;try{await navigator.clipboard.writeText(t)}catch(e){$('#bk').select()}toast('تم نسخ النسخة الاحتياطية، احفظها في مكان آمن')};
 $('#im').onclick=()=>{try{const o=JSON.parse($('#bk').value);if(typeof o.p!=='string'||o.p.length!==K*N)throw 0;S=Object.assign(S,o);save();setTheme(S.theme||'dark');$('#sd').value=S.start||'';$('#hi').textContent=S.name?'أهلاً يا '+S.name:'';setDay(S.day);toast('تم استرجاع التقدّم')}catch(e){toast('النسخة غير صالحة، انسخها كاملة وجرّب تاني')}};
-$('#pgi').oninput=()=>{const v=Math.max(0,Math.min(604,Math.floor(+$('#pgi').value||0)));if(v)S.pg[S.day]=v;else delete S.pg[S.day];save();kh()};
+$('#pgi').oninput=()=>{const v=Math.max(0,Math.min(604,Math.floor(+$('#pgi').value||0)));if(v)S.pg[S.day]=v;else delete S.pg[S.day];save();kh();report()};
 function ayR(){let i;do{i=Math.floor(Math.random()*AY.length)}while(i===ayI);ayI=i;S.ayl=i;save();const p=$('#ayt'),s=$('#ays');p.style.opacity=0;s.style.opacity=0;setTimeout(()=>{p.textContent=AY[i][0];s.textContent=AY[i][1];p.style.opacity=1;s.style.opacity=1},500)}
 setInterval(ayR,45000);
 autoDay();chips();update();cdn();setInterval(cdn,1000);
