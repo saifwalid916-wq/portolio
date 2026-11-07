@@ -1,0 +1,89 @@
+:root{--bg:#e9f0e3;--card:#f8fbf4;--ink:#12281c;--mut:#5d7064;--gold:#a8791a;--acc:#1f7a5c;--line:#cddcc6;--hero:#0f2a1c;--heroink:#f3ead2;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1f16;--card:#163024;--ink:#e8efe0;--mut:#9db3a5;--gold:#d9b04a;--acc:#3f9b6a;--line:#2b4a38;--hero:#07130d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1f16;--card:#163024;--ink:#e8efe0;--mut:#9db3a5;--gold:#d9b04a;--acc:#3f9b6a;--line:#2b4a38;--hero:#07130d;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.7 Tajawal,Tahoma,sans-serif;transition:background .4s,color .4s}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+.hero{background:var(--hero);color:var(--heroink);position:relative;overflow:hidden;padding:18px 0 34px;border-radius:0 0 36px 36px}
+.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#f3ead2;opacity:.2;animation:tw 3s ease-in-out infinite}
+@keyframes tw{50%{opacity:.95;transform:scale(1.6)}}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:8px;position:relative}
+.bar b{font-weight:500}
+.ib{background:#ffffff18;border:1px solid #ffffff30;color:var(--heroink);border-radius:20px;padding:4px 12px;font-size:14px}
+.ib:hover{background:#ffffff30}
+h1{font:700 clamp(28px,6vw,46px)/1.3 "Reem Kufi",Tajawal,sans-serif;margin:18px 0 4px;text-align:center;color:var(--heroink);position:relative}
+.sub{text-align:center;margin:0 0 18px;opacity:.8;position:relative}
+.stage{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:center;position:relative}
+.ringbox{position:relative;width:176px;height:176px}
+.ringbox svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ringbox circle{fill:none;stroke-width:9}
+.trk{stroke:#ffffff22}
+#rg{stroke:#e6b655;stroke-linecap:round;stroke-dasharray:326.7;stroke-dashoffset:326.7;transition:stroke-dashoffset 1.2s cubic-bezier(.2,.8,.2,1)}
+.mid{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.mid svg{width:46px;height:46px;transform:none;margin:0 auto;animation:glow 4s ease-in-out infinite}
+@keyframes glow{50%{filter:drop-shadow(0 0 8px #e6b655);transform:rotate(-8deg)}}
+.mid strong{font:700 30px/1.1 "Reem Kufi",sans-serif}
+.mid small{opacity:.75;font-size:12px}
+.sts{display:grid;gap:12px;flex:1;min-width:260px;max-width:440px}
+.st{background:#ffffff12;border:1px solid #ffffff22;border-radius:16px;padding:12px 16px}
+.st .r{display:flex;justify-content:space-between;align-items:baseline}
+.st em{font-style:normal;font-size:24px;font-weight:700;color:#e6b655}
+.pb{height:8px;background:#ffffff22;border-radius:8px;overflow:hidden;margin:6px 0}
+.pb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e6b655,#4fd1a1);border-radius:8px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.st p{margin:0;font-size:14px;opacity:.9}
+section{margin-top:26px}
+h2{font:700 22px "Reem Kufi",Tajawal,sans-serif;margin:0 0 12px;color:var(--gold)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;transition:background .4s,border-color .4s}
+.stp{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.stp button.n{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;font-size:18px}
+.stp button.n:hover{background:var(--line)}
+.stp div{text-align:center}.stp strong{font:700 20px "Reem Kufi",sans-serif}
+.grp{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px;align-items:center}
+.grp>span{width:84px;color:var(--mut);font-size:14px}
+.chip{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:transparent;border-radius:22px;padding:6px 14px;font-size:15px}
+.chip.on,.c.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.chip.on::before{content:"✓"}
+.pop{animation:pop .45s ease}
+@keyframes pop{40%{transform:scale(1.28);box-shadow:0 0 0 8px #e6b65555}}
+.rep{white-space:pre-line;line-height:2}
+.rep b{color:var(--gold)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{background:var(--gold);color:#1b2440;border:0;border-radius:12px;padding:8px 18px;font-weight:700}
+.btn.o{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:12px}
+.tab{flex:1;white-space:nowrap;border:1px solid var(--line);background:transparent;border-radius:12px;padding:8px 14px}
+.tab[aria-selected="true"]{background:var(--gold);color:#1b2440;border-color:var(--gold);font-weight:700}
+.goals{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-bottom:12px}
+.g{border:1px solid var(--line);border-radius:14px;padding:10px 14px}
+.g .pb{background:var(--line)}.g .pb i{background:var(--acc)}
+.ok{color:var(--acc);font-weight:700}.no{color:var(--mut)}
+.sc{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;text-align:center}
+th,td{padding:5px 4px;border-bottom:1px solid var(--line);font-size:13px}
+th:first-child,td:first-child{position:sticky;right:0;background:var(--card);text-align:right;padding-right:12px;min-width:84px;z-index:1}
+.sec td{background:var(--line);color:var(--gold);font-weight:700;text-align:right}
+.tdy{background:#e6b65522}
+.c{width:32px;height:32px;border-radius:9px;border:1.5px solid var(--line);background:transparent;padding:0}
+.c.on::after{content:"✓";font-weight:700}
+.c:hover{border-color:var(--gold)}
+.ay p{font:700 22px/1.9 "Reem Kufi",serif;margin:0}.bars{display:flex;gap:3px;align-items:flex-end;height:90px}.bars button{flex:1;border:0;border-radius:4px 4px 0 0;background:var(--acc);min-height:3px;padding:0;opacity:.85}.bars button.cur{background:var(--gold);opacity:1}.bdg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.b{border:1px dashed var(--line);border-radius:14px;padding:10px;text-align:center;opacity:.45;filter:grayscale(1)}.b.on{opacity:1;filter:none;border:1px solid var(--gold);background:var(--card);animation:pop .6s ease}.b span{font-size:28px;display:block}textarea,input[type=date]{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px;font:inherit}textarea{height:80px;margin:10px 0}
+.az summary{cursor:pointer;font:700 19px "Reem Kufi",Tajawal,sans-serif;color:var(--gold)}.z{padding:10px 0;border-top:1px solid var(--line);font-size:19px;line-height:2.1}.z small{display:block;color:var(--mut);font-size:13px;line-height:1.5}
+.zr{display:flex;align-items:center;gap:12px;margin-top:6px}.tsb{width:76px;height:76px;border-radius:50%;border:0;padding:5px;flex:none;background:conic-gradient(var(--gold) calc(var(--p,0)*1%),var(--line) 0);transition:background .3s}.tsb .in{display:grid;place-content:center;width:100%;height:100%;border-radius:50%;background:var(--card);font:700 19px "Reem Kufi",sans-serif;color:var(--ink)}.tsb.done{background:var(--acc)}.tsb.done .in{background:var(--acc);color:#fff}.btn.rs{padding:3px 12px;font-size:13px;margin-inline-start:auto}
+.cd{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:0 0 18px;position:relative}.cd>div{background:#ffffff12;border:1px solid #ffffff22;border-radius:14px;padding:6px 18px;text-align:center}.cd small{display:block;opacity:.8}.cd b{font:700 24px "Reem Kufi",sans-serif;color:#e6b655;font-variant-numeric:tabular-nums}
+.jbar{background:var(--line)}.jz{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:6px;margin-top:10px}.jz.w{grid-template-columns:repeat(auto-fill,minmax(88px,1fr))}.jb,.qb{border:1.5px solid var(--line);background:transparent;border-radius:10px;padding:6px 0;font-weight:700}.qb{display:flex;flex-direction:column;line-height:1.4;padding:8px 4px}.qb.odd{border-color:var(--gold)}.qb small{font-size:12px;font-weight:400;opacity:.8}.jb.on,.qb.on{background:var(--acc);border-color:var(--acc);color:#fff}input[type=number]{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px;font:inherit}
+.ifb{margin-top:10px;padding:10px 14px;border:1px solid var(--gold);border-radius:14px;background:#d9b04a1f;font-weight:700;animation:up .6s cubic-bezier(.2,.8,.2,1)}.ifb[hidden]{display:none}
+.ay p,.ay small{transition:opacity .5s}
+.ov{position:fixed;inset:0;background:#06120ae6;display:none;place-items:center;z-index:9;padding:20px}
+.ov.s{display:grid}
+.md{background:var(--card);border:1px solid var(--gold);border-radius:24px;padding:28px 24px;max-width:380px;width:100%;text-align:center;animation:up .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes up{from{opacity:0;transform:translateY(30px) scale(.96)}}
+.md svg{width:64px;animation:glow 4s ease-in-out infinite}
+.md h3{font:700 24px "Reem Kufi",sans-serif;margin:6px 0;color:var(--gold)}
+.md input{width:100%;margin:12px 0;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--gold);color:#1b2440;padding:12px 20px;border-radius:16px;font-weight:700;max-width:90%;text-align:center;transition:transform .6s cubic-bezier(.2,.8,.2,1);z-index:10}
+.toast.s{transform:translate(-50%,0)}
+footer{text-align:center;color:var(--mut);padding:30px 0 20px;font-size:14px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

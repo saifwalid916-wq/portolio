@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>تحدي شهر رمضان المبارك</title>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+<div class="wrap">
+<div class="bar"><b id="hi"></b><span><button class="ib" id="nm">تغيير الاسم</button> <button class="ib" id="tg" aria-label="تبديل الوضع الليلي">🌙</button></span></div>
+<h1>تحدي شهر رمضان المبارك</h1>
+<p class="sub">29 يوم، 145 صلاة، وختمة بإذن الله</p>
+<div class="cd"><div><small id="cd3"></small><b id="t3">--</b></div><div><small id="cd1"></small><b id="t1">--:--:--</b></div><div><small id="cd2"></small><b id="t2">--:--:--</b></div></div>
+<div class="stage">
+<div class="ringbox"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="52"/><circle id="rg" cx="60" cy="60" r="52"/></svg>
+<div class="mid"><svg viewBox="0 0 100 100"><defs><mask id="mk"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="30" fill="#000"/></mask></defs><circle cx="50" cy="52" r="34" fill="#e6b655" mask="url(#mk)"/></svg><strong id="tp">0%</strong><small>الإنجاز الكلي</small></div></div>
+<div class="sts">
+<div class="st"><div class="r"><span>إجمالي الصلوات</span><span><em id="sp">0</em> / 145</span></div><div class="pb"><i id="bp"></i></div><p id="mp"></p></div>
+<div class="st"><div class="r"><span>إجمالي الأجزاء</span><span><em id="sq">0</em> / 30</span></div><div class="pb"><i id="bq"></i></div><p id="mq"></p></div>
+</div></div></div>
+</header>
+
+<main class="wrap">
+<section>
+<h2>تسجيل اليوم</h2>
+<div class="card">
+<div class="stp"><button class="n" id="nx" aria-label="اليوم التالي">›</button><div><strong id="dl"></strong><br><small id="dp"></small></div><button class="n" id="pv" aria-label="اليوم السابق">‹</button></div>
+<div class="grp"><span>الصلوات</span><span id="g1" style="display:contents"></span></div>
+<div class="grp"><span>الورد</span><span id="g2" style="display:contents"></span></div>
+<div class="grp"><span>أعمال صالحة</span><span id="g3" style="display:contents"></span></div>
+<p id="ift" class="no" style="margin:0;font-size:14px"></p>
+<div id="ifb" class="ifb" hidden></div>
+</div>
+</section>
+
+<section>
+<h2>آية ودعاء اليوم</h2>
+<div class="card ay"><p id="ayt"></p><small id="ays" class="no"></small></div>
+</section>
+
+<section>
+<h2>أذكار الصباح والمساء</h2>
+<details class="card az"><summary>أذكار الصباح</summary><div id="azs"></div></details>
+<details class="card az" style="margin-top:10px"><summary>أذكار المساء</summary><div id="azm"></div></details>
+</section>
+
+<section>
+<h2>التقرير اليومي</h2>
+<div class="card"><div class="rep" id="rep"></div>
+<div class="acts"><button class="btn" id="cp">نسخ التقرير</button><button class="btn o" id="sh" hidden>مشاركة</button></div></div>
+</section>
+
+<section>
+<h2>متابعة الختمة</h2>
+<div class="card"><p id="jt" style="margin:0 0 6px"></p><div class="pb jbar"><i id="jp"></i></div><div class="jz" id="jz"></div>
+<label style="display:flex;gap:10px;align-items:center;margin-top:12px"><span id="pgl"></span><input type="number" id="pgi" min="0" max="604" inputmode="numeric" placeholder="0" style="max-width:110px"></label></div>
+</section>
+
+<section id="ln" hidden>
+<h2>العشر الأواخر</h2>
+<div class="card ay"><p id="qt" style="font:500 16px Tajawal,sans-serif;margin:0 0 6px"></p><div class="jz w" id="qn"></div><p style="margin-top:14px">اللهم إنك عفو تحب العفو فاعف عني</p><small class="no">دعاء ليلة القدر، والليالي الوترية أرجى</small></div>
+</section>
+
+<section>
+<h2>إنجاز الأيام</h2>
+<div class="card"><div class="bars" id="bars"></div><small class="no">اضغط على أي يوم لفتح تقريره</small></div>
+</section>
+
+<section>
+<h2>الشارات</h2>
+<div class="bdg" id="bdg"></div>
+</section>
+
+<section>
+<h2>جدول التحدي</h2>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div class="goals" id="goals"></div>
+<div class="sc"><table id="tb"></table></div>
+</section>
+<section>
+<h2>الإعدادات والنسخ الاحتياطي</h2>
+<div class="card"><label>أول يوم في رمضان (عشان الموقع يعرف يوم كام النهاردة)<input type="date" id="sd"></label>
+<textarea id="bk" placeholder="للاسترجاع: الصق هنا النسخة الاحتياطية واضغط استرجاع" aria-label="النسخة الاحتياطية"></textarea>
+<div class="acts"><button class="btn" id="ex">نسخة احتياطية</button><button class="btn o" id="im">استرجاع</button></div></div>
+</section>
+</main>
+<footer>تقبّل الله منا ومنكم صالح الأعمال</footer>
+
+<div class="ov" id="wl" role="dialog" aria-modal="true" aria-labelledby="wt"><div class="md">
+<svg viewBox="0 0 100 100"><defs><mask id="mk2"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="30" fill="#000"/></mask></defs><circle cx="50" cy="52" r="34" fill="#e6b655" mask="url(#mk2)"/></svg>
+<h3 id="wt">رمضان كريم</h3>
+<p>اكتب اسمك عشان نبدأ التحدي سوا</p>
+<input id="ni" type="text" maxlength="30" placeholder="اسمك" autocomplete="given-name">
+<button class="btn" id="go">ابدأ التحدي</button>
+</div></div>
+<div class="toast" id="ts" role="status"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
