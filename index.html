@@ -4,15 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>تحدي شهر رمضان المبارك</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f2a1c">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="hero">
 <div class="wrap">
-<div class="bar"><b id="hi"></b><span><button class="ib" id="nm">تغيير الاسم</button> <button class="ib" id="tg" aria-label="تبديل الوضع الليلي">🌙</button></span></div>
+<div class="bar"><b id="hi"></b><span><button class="ib" id="nm">تغيير الاسم</button> <button class="ib" id="snd" aria-label="تنبيه وقت الصلاة">🔕</button> <button class="ib" id="tg" aria-label="تبديل الوضع الليلي">🌙</button></span></div>
 <h1>تحدي شهر رمضان المبارك</h1>
 <p class="sub">29 يوم، 145 صلاة، وختمة بإذن الله</p>
-<div class="cd"><div><small id="cd3"></small><b id="t3">--</b></div><div><small id="cd1"></small><b id="t1">--:--:--</b></div><div><small id="cd2"></small><b id="t2">--:--:--</b></div></div>
+<div class="clk">
+<div class="ckt"><span id="ckd"></span><span id="ckn"></span></div>
+<div class="rmb" id="rmb"></div>
+<div class="np" id="np"><small>الصلاة الجاية</small><strong id="npn">--</strong><span id="npt"></span><b id="t1">--:--:--</b><div class="pb"><i id="npb"></i></div></div>
+<div class="ifx" id="ifx" hidden><div><small id="cd2"></small><b id="t2">--:--:--</b></div><span id="ifl"></span></div>
+<div class="tl" id="tl"></div>
+</div>
 <div class="stage">
 <div class="ringbox"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="52"/><circle id="rg" cx="60" cy="60" r="52"/></svg>
 <div class="mid"><svg viewBox="0 0 100 100"><defs><mask id="mk"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="30" fill="#000"/></mask></defs><circle cx="50" cy="52" r="34" fill="#e6b655" mask="url(#mk)"/></svg><strong id="tp">0%</strong><small>الإنجاز الكلي</small></div></div>
@@ -49,12 +61,12 @@
 <section>
 <h2>التقرير اليومي</h2>
 <div class="card"><div class="rep" id="rep"></div>
-<div class="acts"><button class="btn" id="cp">نسخ التقرير</button><button class="btn o" id="sh" hidden>مشاركة</button></div></div>
+<div class="acts"><button class="btn" id="cp">نسخ التقرير</button><button class="btn o" id="cb">🖼️ بطاقة إنجاز للمشاركة</button><button class="btn o" id="sh" hidden>مشاركة</button></div></div>
 </section>
 
 <section>
 <h2>متابعة الختمة</h2>
-<div class="card"><p id="jt" style="margin:0 0 6px"></p><div class="pb jbar"><i id="jp"></i></div><div class="jz" id="jz"></div>
+<div class="card"><p id="jt" style="margin:0 0 6px"></p><p id="jpos" style="margin:0 0 4px;font-weight:700;color:var(--gold)"></p><p id="jtd" class="no" style="margin:0 0 8px;font-size:14px"></p><div class="pb jbar"><i id="jp"></i></div><div class="jz" id="jz"></div><p id="jinfo" style="margin:10px 0 0;font-size:14px;color:var(--gold)"></p>
 <label style="display:flex;gap:10px;align-items:center;margin-top:12px"><span id="pgl"></span><input type="number" id="pgi" min="0" max="604" inputmode="numeric" placeholder="0" style="max-width:110px"></label></div>
 </section>
 
@@ -78,10 +90,12 @@
 <div class="tabs" role="tablist" id="tabs"></div>
 <div class="goals" id="goals"></div>
 <div class="sc"><table id="tb"></table></div>
+<div class="card" id="wrep" style="margin-top:12px"></div>
 </section>
 <section>
 <h2>الإعدادات والنسخ الاحتياطي</h2>
-<div class="card"><label>أول يوم في رمضان (عشان الموقع يعرف يوم كام النهاردة)<input type="date" id="sd"></label>
+<div class="card"><label style="display:block">المحافظة (لحساب المواقيت)<select id="cty"></select></label>
+<button class="btn o" id="loc" style="margin-top:8px">📍 حدد محافظتي تلقائياً</button>
 <textarea id="bk" placeholder="للاسترجاع: الصق هنا النسخة الاحتياطية واضغط استرجاع" aria-label="النسخة الاحتياطية"></textarea>
 <div class="acts"><button class="btn" id="ex">نسخة احتياطية</button><button class="btn o" id="im">استرجاع</button></div></div>
 </section>
@@ -95,6 +109,7 @@
 <input id="ni" type="text" maxlength="30" placeholder="اسمك" autocomplete="given-name">
 <button class="btn" id="go">ابدأ التحدي</button>
 </div></div>
+<div class="ov" id="cv" role="dialog" aria-modal="true" aria-label="بطاقة الإنجاز"><div class="md" style="max-height:94vh;overflow:auto"><img id="cvi" alt="بطاقة الإنجاز" style="width:100%;border-radius:14px"><p class="no" style="font-size:13px;margin:8px 0">اضغط مطوّلاً على الصورة لحفظها</p><div class="acts" style="justify-content:center"><button class="btn" id="cvs" hidden>مشاركة</button><a class="btn o" id="cvd" download="ramadan-card.png">تنزيل</a><button class="btn o" id="cvx">إغلاق</button></div></div></div>
 <div class="toast" id="ts" role="status"></div>
 
 <script src="script.js"></script>
