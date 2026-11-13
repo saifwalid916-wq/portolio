@@ -18,6 +18,7 @@ import {
 let currentUser = null;
 let dataReady = false;
 let saveTimer = null;
+let signingIn = false;
 
 // مكان حفظ بيانات المستخدم
 function getUserDataRef(uid) {
@@ -59,8 +60,6 @@ async function loadHabits() {
   try {
     const snapshot = await getDocs(collection(db, "habits"));
 
-    console.log("العادات الموجودة:");
-
     snapshot.forEach((habit) => {
       console.log(habit.id, habit.data());
     });
@@ -91,12 +90,29 @@ async function loadUserData(uid) {
 
 // متابعة تسجيل الدخول
 onAuthStateChanged(auth, async (user) => {
+
+  // لو مفيش حساب محفوظ، ننشئ حساب مرة واحدة
   if (!user) {
     currentUser = null;
     dataReady = false;
+
+    if (signingIn) return;
+
+    signingIn = true;
+
+    try {
+      await signInAnonymously(auth);
+      console.log("تم إنشاء حساب مشارك جديد");
+    } catch (error) {
+      console.error("خطأ في تسجيل الدخول:", error);
+    } finally {
+      signingIn = false;
+    }
+
     return;
   }
 
+  // استخدام الحساب المحفوظ
   currentUser = user;
   dataReady = false;
 
@@ -118,10 +134,3 @@ onAuthStateChanged(auth, async (user) => {
     console.error("خطأ تجهيز بيانات المستخدم:", error);
   }
 });
-
-// تسجيل دخول مجهول إذا لم يكن هناك مستخدم
-if (!auth.currentUser) {
-  signInAnonymously(auth).catch((error) => {
-    console.error("خطأ في تسجيل الدخول:", error);
-  });
-}

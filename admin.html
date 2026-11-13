@@ -4,195 +4,411 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071b12">
+  <title>لوحة الإدارة | تحدي رمضان</title>
 
-  <title>مسابقة رمضان المبارك | لوحة الأدمن</title>
+  <script>
+    document.documentElement.dataset.theme =
+      localStorage.getItem("ramadanTheme") || "dark";
+  </script>
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="admin.css">
-
-  <script>
-    const savedTheme = localStorage.getItem("ramadanTheme") || "dark";
-    document.documentElement.dataset.theme = savedTheme;
-  </script>
 </head>
 
-<body>
+<body class="admin-page">
 
-  <div class="ramadan-decoration decoration-top">☪</div>
-  <div class="ramadan-decoration decoration-left">✦</div>
-  <div class="ramadan-decoration decoration-right">✧</div>
+<div class="admin-shell">
 
-  <header class="admin-header">
-
+  <header class="admin-topbar">
     <div class="admin-brand">
-      <div class="brand-moon">🌙</div>
-
+      <span class="brand-moon">☾</span>
       <div>
-        <h1>مسابقة رمضان المبارك</h1>
-        <p>لوحة متابعة المشاركين</p>
+        <strong>تحدي رمضان</strong>
+        <small>لوحة تحكم المشرف</small>
       </div>
     </div>
 
-    <div class="admin-header-actions">
-
-      <span class="admin-welcome">مرحباً بك أيها الأدمن</span>
-
-      <button id="themeToggle" type="button">
-        ☀️ الوضع الفاتح
-      </button>
-
-    </div>
-
-  </header>
-
-  <main class="admin-container">
-
-    <section class="ramadan-hero">
-      <div class="hero-content">
-        <span class="hero-small-title">🌙 رمضان يجمعنا على الخير</span>
-
-        <h2>رحلة التغيير والإنجاز</h2>
-
-        <p>
-          تابع إنجازات المشاركين وشجعهم على الاستمرار في تحدي رمضان
-        </p>
-      </div>
-
-      <div class="hero-lanterns">
-        🏮 ✨ 🏮
-      </div>
-    </section>
-
-    <section id="login" class="login-card">
-
-      <div class="login-icon">🌙</div>
-
-      <h2>تسجيل دخول الأدمن</h2>
-
-      <p class="login-description">
-        أهلاً بك، سجّل الدخول لمتابعة المشاركين
-      </p>
-
-      <input
-        type="email"
-        id="email"
-        placeholder="البريد الإلكتروني"
-        autocomplete="username"
-      >
-
-      <input
-        type="password"
-        id="password"
-        placeholder="كلمة المرور"
-        autocomplete="current-password"
-      >
-
-      <button id="loginBtn" type="button">
-        تسجيل الدخول
-      </button>
-
-      <p id="message"></p>
-
-    </section>
-
-    <section id="dashboard" hidden>
-
-      <div class="dashboard-heading">
-        <div>
-          <span class="section-eyebrow">لوحة المتابعة</span>
-          <h2>📊 إحصائيات المشاركين</h2>
-          <p>كل إنجاز صغير يقربنا من هدفنا</p>
-        </div>
-      </div>
-
-      <div class="stats-card">
-
-        <div class="stats-icon">👥</div>
-
-        <div class="stats-information">
-          <h3>إجمالي المشاركين</h3>
-          <p id="totalUsers">جاري التحميل...</p>
-        </div>
-
-        <div class="stats-decoration">✦</div>
-
-      </div>
-
-      <section class="chart-card">
-
-        <div class="card-heading">
-          <span>📈</span>
-          <h2>نسب إنجاز المشاركين</h2>
-        </div>
-
-        <canvas id="progressChart"></canvas>
-
-      </section>
-
-      <section class="participants-card">
-
-        <div class="card-heading">
-          <span>🏆</span>
-          <h2>قائمة المشاركين</h2>
-        </div>
-
-        <div class="search-box">
-          <span>🔎</span>
-
-          <input
-            type="search"
-            id="participantSearch"
-            placeholder="ابحث عن اسم المشارك..."
-          >
-        </div>
-
-        <div id="participantsList"></div>
-
-      </section>
-
-      <button id="logoutBtn" type="button">
+    <div class="topbar-actions">
+      <span class="admin-user">لوحة الإدارة</span>
+      <button id="themeToggle" class="icon-button" type="button">☀️</button>
+      <button id="logoutBtn" class="logout-button" type="button" hidden>
         تسجيل الخروج
       </button>
+    </div>
+  </header>
 
+  <main class="admin-main">
+
+    <!-- تسجيل الدخول -->
+    <section id="login" class="login-wrap">
+      <div class="login-card">
+        <div class="login-icon">🌙</div>
+        <h2>مرحباً بك في لوحة الإدارة</h2>
+        <p>سجل الدخول لمتابعة إنجازات المشاركين في تحدي رمضان</p>
+
+        <label for="email">البريد الإلكتروني</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="أدخل البريد الإلكتروني"
+          autocomplete="username"
+        >
+
+        <label for="password">كلمة المرور</label>
+        <input
+          id="password"
+          type="password"
+          placeholder="أدخل كلمة المرور"
+          autocomplete="current-password"
+        >
+
+        <button id="loginBtn" type="button">
+          دخول إلى لوحة التحكم
+        </button>
+
+        <p id="message" class="login-message" role="status"></p>
+      </div>
     </section>
 
+    <!-- لوحة التحكم: لا تظهر إلا بعد تسجيل الدخول -->
+    <section id="dashboard" hidden>
+
+      <!-- الهيرو والزخارف -->
+      <section class="ramadan-hero">
+        <div class="ornament-pattern"></div>
+
+        <svg class="hero-art" viewBox="0 0 1200 250"
+          preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+
+          <defs>
+            <linearGradient id="goldLantern" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#fff0b5"/>
+              <stop offset="45%" stop-color="#e2bd68"/>
+              <stop offset="100%" stop-color="#9d702d"/>
+            </linearGradient>
+
+            <radialGradient id="lanternGlow">
+              <stop offset="0%" stop-color="#e2bd68" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#e2bd68" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- الهلال -->
+          <circle cx="600" cy="75" r="30" fill="#e2bd68"/>
+          <circle cx="615" cy="63" r="29" fill="#0b2b1d"/>
+
+          <!-- النجوم -->
+          <g fill="#e2bd68">
+            <path d="M470 54l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/>
+            <path d="M720 42l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/>
+            <path d="M780 95l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/>
+            <circle cx="390" cy="95" r="2"/>
+            <circle cx="830" cy="48" r="2"/>
+            <circle cx="540" cy="115" r="2"/>
+            <circle cx="675" cy="115" r="2"/>
+          </g>
+
+          <!-- فانوس -->
+          <g transform="translate(1000 0)">
+            <path d="M0 0V34" stroke="url(#goldLantern)" stroke-width="2"/>
+            <circle cx="0" cy="39" r="13" fill="url(#lanternGlow)"/>
+            <path d="M-8 36h16l-2 8h-12z" fill="url(#goldLantern)"/>
+            <path d="M-12 44h24l-3 34h-18z" fill="url(#goldLantern)" stroke="#f5d98c" stroke-width="1.5"/>
+            <path d="M-8 50h16M-10 60h20M-8 70h16" stroke="#754d1d" stroke-width="2"/>
+            <path d="M-12 44l-5 7v17l5 10M12 44l5 7v17l-5 10" fill="none" stroke="#f5d98c" stroke-width="1.5"/>
+            <path d="M-7 78h14l-7 9z" fill="url(#goldLantern)"/>
+            <path d="M0 87v12" stroke="#e2bd68" stroke-width="2"/>
+          </g>
+
+          <!-- فانوس -->
+          <g transform="translate(200 0)">
+            <path d="M0 0V34" stroke="url(#goldLantern)" stroke-width="2"/>
+            <circle cx="0" cy="39" r="13" fill="url(#lanternGlow)"/>
+            <path d="M-8 36h16l-2 8h-12z" fill="url(#goldLantern)"/>
+            <path d="M-12 44h24l-3 34h-18z" fill="url(#goldLantern)" stroke="#f5d98c" stroke-width="1.5"/>
+            <path d="M-8 50h16M-10 60h20M-8 70h16" stroke="#754d1d" stroke-width="2"/>
+            <path d="M-12 44l-5 7v17l5 10M12 44l5 7v17l-5 10" fill="none" stroke="#f5d98c" stroke-width="1.5"/>
+            <path d="M-7 78h14l-7 9z" fill="url(#goldLantern)"/>
+            <path d="M0 87v12" stroke="#e2bd68" stroke-width="2"/>
+          </g>
+
+          <!-- مباني وقباب -->
+          <g fill="#d6b15e" opacity=".17">
+            <path d="M0 225V190h55v35z"/>
+            <path d="M55 225v-50q30-65 60 0v50z"/>
+            <path d="M115 225v-40h50v40z"/>
+            <path d="M165 225v-65q30-60 60 0v65z"/>
+            <path d="M225 225v-42h65v42z"/>
+            <path d="M290 225v-58q35-70 70 0v58z"/>
+            <path d="M360 225v-40h80v40z"/>
+            <path d="M440 225v-55q30-65 60 0v55z"/>
+            <path d="M700 225v-55q30-65 60 0v55z"/>
+            <path d="M760 225v-40h80v40z"/>
+            <path d="M840 225v-58q35-70 70 0v58z"/>
+            <path d="M910 225v-42h65v42z"/>
+            <path d="M975 225v-65q30-60 60 0v65z"/>
+            <path d="M1035 225v-40h50v40z"/>
+            <path d="M1085 225v-50q30-65 60 0v50z"/>
+            <path d="M1145 225v-35h55v35z"/>
+          </g>
+
+          <!-- المآذن -->
+          <g fill="#d6b15e" opacity=".22">
+            <path d="M80 225V110h8v115z"/>
+            <path d="M73 115l11-24 11 24z"/>
+            <path d="M73 140h22v5H73z"/>
+            <path d="M1110 225V110h8v115z"/>
+            <path d="M1103 115l11-24 11 24z"/>
+            <path d="M1103 140h22v5h-22z"/>
+          </g>
+
+          <!-- أبواب -->
+          <g fill="#071b12" opacity=".55">
+            <path d="M65 225v-28q18-30 36 0v28z"/>
+            <path d="M195 225v-28q18-30 36 0v28z"/>
+            <path d="M865 225v-28q18-30 36 0v28z"/>
+            <path d="M995 225v-28q18-30 36 0v28z"/>
+          </g>
+        </svg>
+
+        <div class="hero-content">
+          <span class="hero-kicker">✦ رمضان يجمعنا على الطاعة ✦</span>
+          <h1>تحدي شهر رمضان المبارك</h1>
+          <p>29 يومًا من العبادة والإنجاز.. وخطوة أقرب إلى الله</p>
+        </div>
+
+        <div class="hero-bottom-ornament">
+          ✦　۞　✦　۞　✦
+        </div>
+      </section>
+
+      <!-- الإحصائيات -->
+      <section class="stats-grid">
+
+        <article class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-info">
+            <span>إجمالي المشاركين</span>
+            <strong id="totalUsers">0</strong>
+            <small>كل المشاركين المسجلين</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon">📈</div>
+          <div class="stat-info">
+            <span>متوسط الإنجاز</span>
+            <strong id="averageProgress">0%</strong>
+            <small>متوسط تقدم الجميع</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon advanced-icon">🏆</div>
+          <div class="stat-info">
+            <span>تجاوزوا 50%</span>
+            <strong id="advancedUsers">0</strong>
+            <small>نصف التحدي أو أكثر</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon active-icon">✓</div>
+          <div class="stat-info">
+            <span>بدأوا الإنجاز</span>
+            <strong id="activeUsers">0</strong>
+            <small>لديهم إنجاز واحد على الأقل</small>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- الرسوم البيانية -->
+      <section class="analytics-grid">
+
+        <article class="panel chart-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="eyebrow">تحليل الأداء</span>
+              <h2>مستويات إنجاز المشاركين</h2>
+            </div>
+            <span class="panel-symbol">📊</span>
+          </div>
+
+          <div class="chart-holder">
+            <canvas id="progressChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel completion-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="eyebrow">نظرة عامة</span>
+              <h2>متوسط الإنجاز</h2>
+            </div>
+            <span class="panel-symbol">✦</span>
+          </div>
+
+          <div class="completion-ring" id="completionRing">
+            <div>
+              <strong id="completionValue">0%</strong>
+              <span>نسبة الإنجاز</span>
+            </div>
+          </div>
+
+          <p class="completion-note">متوسط إنجاز جميع المشاركين</p>
+        </article>
+
+      </section>
+
+      <!-- قائمة المشاركين -->
+      <section class="panel participants-panel">
+
+        <div class="panel-heading participants-heading">
+          <div>
+            <span class="eyebrow">إدارة ومتابعة</span>
+            <h2>المشاركون</h2>
+            <p>اضغط على عرض التفاصيل لمتابعة إنجازات كل مشارك.</p>
+          </div>
+
+          <div class="list-tools">
+            <label class="search-box">
+              <span>⌕</span>
+              <input
+                id="participantSearch"
+                type="search"
+                placeholder="ابحث عن مشارك..."
+              >
+            </label>
+
+            <span id="visibleCount" class="participant-count">
+              0 مشارك
+            </span>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="participants-table">
+            <thead>
+              <tr>
+                <th>المشارك</th>
+                <th>البريد / المعرف</th>
+                <th>الحالة</th>
+                <th>نسبة الإنجاز</th>
+                <th>الإنجازات</th>
+                <th>التفاصيل</th>
+              </tr>
+            </thead>
+
+            <tbody id="participantsList">
+              <tr>
+                <td colspan="6" class="empty-state">
+                  جاري تحميل المشاركين...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p id="emptySearch" class="empty-state" hidden>
+          لا توجد نتائج مطابقة للبحث.
+        </p>
+
+      </section>
+
+      <footer class="admin-footer">
+        🌙 تحدي رمضان — معًا نقترب إلى الله
+      </footer>
+
+    </section>
   </main>
+</div>
 
-  <footer class="admin-footer">
-    <div>🌙</div>
-    <p>رمضان .. فرصة جديدة لنكون أفضل</p>
-    <span>تقبل الله منا ومنكم صالح الأعمال</span>
-  </footer>
+<!-- خلفية النافذة الجانبية -->
+<div id="drawerBackdrop" class="drawer-backdrop" hidden></div>
 
-  <script>
-    const themeToggle = document.getElementById("themeToggle");
+<!-- نافذة تفاصيل المشارك -->
+<aside
+  id="participantDrawer"
+  class="participant-drawer"
+  aria-hidden="true"
+  aria-label="تفاصيل المشارك"
+>
+  <div class="drawer-top">
+    <div>
+      <span class="eyebrow">ملف المشارك</span>
+      <h2>تفاصيل الإنجاز</h2>
+    </div>
 
-    function updateThemeButton() {
-      const theme = document.documentElement.dataset.theme;
+    <button id="closeDrawer" class="drawer-close" type="button"
+      aria-label="إغلاق">×</button>
+  </div>
 
-      themeToggle.textContent =
-        theme === "dark" ? "☀️ الوضع الفاتح" : "🌙 الوضع الداكن";
-    }
+  <div id="drawerLoading" class="drawer-loading">
+    جاري تحميل تفاصيل المشارك...
+  </div>
 
-    themeToggle.addEventListener("click", () => {
-      const currentTheme = document.documentElement.dataset.theme;
+  <div id="drawerContent" hidden>
 
-      const newTheme =
-        currentTheme === "dark" ? "light" : "dark";
+    <div class="drawer-profile">
+      <div class="drawer-avatar">👤</div>
+      <div class="drawer-person">
+        <h3 id="drawerName">المشارك</h3>
+        <p id="drawerEmail"></p>
+      </div>
+    </div>
 
-      document.documentElement.dataset.theme = newTheme;
+    <div class="drawer-mini-stats">
+      <div>
+        <strong id="drawerCompleted">0</strong>
+        <span>إنجاز</span>
+      </div>
 
-      localStorage.setItem("ramadanTheme", newTheme);
+      <div>
+        <strong id="drawerPercent">0%</strong>
+        <span>الإنجاز</span>
+      </div>
 
-      updateThemeButton();
+      <div>
+        <strong id="drawerDays">0</strong>
+        <span>أيام نشطة</span>
+      </div>
+    </div>
 
-      window.dispatchEvent(new Event("themeChanged"));
-    });
+    <section class="drawer-section">
+      <div class="drawer-section-title">
+        <h3>التقدم الكلي</h3>
+        <b id="drawerProgressLabel">0%</b>
+      </div>
 
-    updateThemeButton();
-  </script>
+      <div class="drawer-progress">
+        <span id="drawerProgressBar"></span>
+      </div>
+    </section>
 
-  <script type="module" src="admin.js"></script>
+    <section class="drawer-section">
+      <div class="drawer-section-title">
+        <h3>أيام رمضان</h3>
+        <span>اختر يومًا لعرض تفاصيله</span>
+      </div>
+
+      <div id="drawerDaysList" class="drawer-days"></div>
+    </section>
+
+    <section id="drawerDayDetails" class="drawer-section" hidden>
+      <div class="drawer-section-title">
+        <h3 id="drawerDayTitle">إنجازات اليوم</h3>
+        <span id="drawerDayCount">0 من 15 إنجاز</span>
+      </div>
+
+      <div id="drawerTasks" class="drawer-tasks"></div>
+    </section>
+
+  </div>
+</aside>
+
+<script type="module" src="admin.js"></script>
 
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -9,34 +10,171 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="stylesheet" href="style.css">
+<style>
+/* زخارف الهيدر الرمضانية */
+.hero{position:relative;isolation:isolate;overflow:hidden}
+.hero-art{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.9}
+.hero .wrap{position:relative;z-index:1}
+.hero-art .gold{fill:#e7bd69}
+.hero-art .line{fill:none;stroke:#e7bd69;stroke-width:1.5}
+.hero-art .soft{fill:#d6a94f;opacity:.22}
+.hero-art .dark{fill:#071b12;opacity:.8}
+.hero-art .star{fill:#ffe4a0}
+.hero-art .lantern-glow{fill:#f5c86c;opacity:.16}
+@media(max-width:600px){
+.hero-art{opacity:.55}
+}
+</style>
 </head>
 <body>
+
 <header class="hero">
+<svg class="hero-art" viewBox="0 0 1000 650" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<defs>
+<linearGradient id="ramadanSky" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#071b12"/>
+<stop offset=".55" stop-color="#123d29"/>
+<stop offset="1" stop-color="#071b12"/>
+</linearGradient>
+<radialGradient id="moonGlow">
+<stop offset="0" stop-color="#f6d98c" stop-opacity=".3"/>
+<stop offset="1" stop-color="#f6d98c" stop-opacity="0"/>
+</radialGradient>
+</defs>
+
+<rect width="1000" height="650" fill="url(#ramadanSky)"/>
+<circle cx="790" cy="145" r="115" fill="url(#moonGlow)"/>
+
+<!-- الهلال -->
+<path d="M800 65 A72 72 0 1 0 866 174 A58 58 0 1 1 800 65Z" class="gold"/>
+<circle cx="880" cy="82" r="3" class="star"/>
+<circle cx="720" cy="105" r="2.5" class="star"/>
+<circle cx="910" cy="205" r="2" class="star"/>
+<circle cx="675" cy="195" r="2" class="star"/>
+<path d="M745 55l5 12 12 5-12 5-5 12-5-12-12-5 12-5z" class="star"/>
+<path d="M925 125l4 9 9 4-9 4-4 9-4-9-9-4 9-4z" class="star"/>
+<path d="M610 115l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" class="star"/>
+
+<!-- فوانيس معلقة -->
+<g class="line">
+<path d="M115 0v72 M270 0v110 M900 0v75"/>
+</g>
+<g>
+<circle cx="115" cy="106" r="32" class="lantern-glow"/>
+<path d="M101 75h28l-4 10h-20z" class="gold"/>
+<path d="M99 85h32l-4 43-12 14-12-14z" fill="#d6a94f" opacity=".85"/>
+<path d="M106 91h18v31h-18z" fill="#ffe6a6" opacity=".45"/>
+<path d="M99 128h32l-5 9h-22z" class="gold"/>
+<path d="M115 137v10" class="line"/>
+
+<circle cx="270" cy="145" r="35" class="lantern-glow"/>
+<path d="M256 112h28l-4 10h-20z" class="gold"/>
+<path d="M254 122h32l-4 45-12 14-12-14z" fill="#d6a94f" opacity=".85"/>
+<path d="M261 129h18v31h-18z" fill="#ffe6a6" opacity=".45"/>
+<path d="M254 167h32l-5 9h-22z" class="gold"/>
+<path d="M270 181v10" class="line"/>
+
+<circle cx="900" cy="110" r="32" class="lantern-glow"/>
+<path d="M886 77h28l-4 10h-20z" class="gold"/>
+<path d="M884 87h32l-4 43-12 14-12-14z" fill="#d6a94f" opacity=".85"/>
+<path d="M891 93h18v31h-18z" fill="#ffe6a6" opacity=".45"/>
+<path d="M884 130h32l-5 9h-22z" class="gold"/>
+<path d="M900 139v10" class="line"/>
+</g>
+
+<!-- ظلال المدينة والمآذن -->
+<path class="dark" d="M0 490h80v-65h22v65h38v-95h20v-25l12-22 12 22v25h20v95h55v-75h35v75h45v-115h22v-30l14-25 14 25v30h22v115h70v-65h35v65h70v-95h22v-28l12-20 12 20v28h22v95h60v-70h28v70h70v-115h22v-30l14-25 14 25v30h22v115h70v-75h40v75h100v160H0z"/>
+
+<!-- قباب -->
+<path class="soft" d="M150 490q0-75 55-95 55 20 55 95z"/>
+<path class="soft" d="M430 490q0-85 65-110 65 25 65 110z"/>
+<path class="soft" d="M750 490q0-75 55-95 55 20 55 95z"/>
+
+<!-- تفاصيل المآذن -->
+<g class="line" opacity=".65">
+<path d="M160 330v-35h24v35 M170 295v-24l2-12 2 12v24"/>
+<path d="M380 340v-38h25v38 M390 302v-25l2-12 2 12v25"/>
+<path d="M680 350v-38h25v38 M690 312v-25l2-12 2 12v25"/>
+<path d="M850 330v-35h24v35 M860 295v-24l2-12 2 12v24"/>
+</g>
+</svg>
+
 <div class="wrap">
-<div class="bar"><b id="hi"></b><span><button class="ib" id="nm">تغيير الاسم</button> <button class="ib" id="snd" aria-label="تنبيه وقت الصلاة">🔕</button> <button class="ib" id="tg" aria-label="تبديل الوضع الليلي">🌙</button></span></div>
+<div class="bar">
+<b id="hi"></b>
+<span>
+<button class="ib" id="nm">تغيير الاسم</button>
+<button class="ib" id="snd" aria-label="تنبيه وقت الصلاة">🔕</button>
+<button class="ib" id="tg" aria-label="تبديل الوضع الليلي">🌙</button>
+</span>
+</div>
+
 <h1>تحدي شهر رمضان المبارك</h1>
 <p class="sub">29 يوم، 145 صلاة، وختمة بإذن الله</p>
+
 <div class="clk">
 <div class="ckt"><span id="ckd"></span><span id="ckn"></span></div>
 <div class="rmb" id="rmb"></div>
-<div class="np" id="np"><small>الصلاة الجاية</small><strong id="npn">--</strong><span id="npt"></span><b id="t1">--:--:--</b><div class="pb"><i id="npb"></i></div></div>
-<div class="ifx" id="ifx" hidden><div><small id="cd2"></small><b id="t2">--:--:--</b></div><span id="ifl"></span></div>
+<div class="np" id="np">
+<small>الصلاة الجاية</small>
+<strong id="npn">--</strong>
+<span id="npt"></span>
+<b id="t1">--:--:--</b>
+<div class="pb"><i id="npb"></i></div>
+</div>
+<div class="ifx" id="ifx" hidden>
+<div><small id="cd2"></small><b id="t2">--:--:--</b></div>
+<span id="ifl"></span>
+</div>
 <div class="tl" id="tl"></div>
 </div>
+
 <div class="stage">
-<div class="ringbox"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="52"/><circle id="rg" cx="60" cy="60" r="52"/></svg>
-<div class="mid"><svg viewBox="0 0 100 100"><defs><mask id="mk"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="30" fill="#000"/></mask></defs><circle cx="50" cy="52" r="34" fill="#e6b655" mask="url(#mk)"/></svg><strong id="tp">0%</strong><small>الإنجاز الكلي</small></div></div>
+<div class="ringbox">
+<svg viewBox="0 0 120 120">
+<circle class="trk" cx="60" cy="60" r="52"/>
+<circle id="rg" cx="60" cy="60" r="52"/>
+</svg>
+<div class="mid">
+<svg viewBox="0 0 100 100">
+<defs>
+<mask id="mk">
+<rect width="100" height="100" fill="#fff"/>
+<circle cx="64" cy="40" r="30" fill="#000"/>
+</mask>
+</defs>
+<circle cx="50" cy="52" r="34" fill="#e6b655" mask="url(#mk)"/>
+</svg>
+<strong id="tp">0%</strong>
+<small>الإنجاز الكلي</small>
+</div>
+</div>
+
 <div class="sts">
-<div class="st"><div class="r"><span>إجمالي الصلوات</span><span><em id="sp">0</em> / 145</span></div><div class="pb"><i id="bp"></i></div><p id="mp"></p></div>
-<div class="st"><div class="r"><span>إجمالي الأجزاء</span><span><em id="sq">0</em> / 30</span></div><div class="pb"><i id="bq"></i></div><p id="mq"></p></div>
-</div></div></div>
+<div class="st">
+<div class="r"><span>إجمالي الصلوات</span><span><em id="sp">0</em> / 145</span></div>
+<div class="pb"><i id="bp"></i></div>
+<p id="mp"></p>
+</div>
+<div class="st">
+<div class="r"><span>إجمالي الأجزاء</span><span><em id="sq">0</em> / 30</span></div>
+<div class="pb"><i id="bq"></i></div>
+<p id="mq"></p>
+</div>
+</div>
+</div>
+</div>
 </header>
 
 <main class="wrap">
 <section>
 <h2>تسجيل اليوم</h2>
 <div class="card">
-<div class="stp"><button class="n" id="nx" aria-label="اليوم التالي">›</button><div><strong id="dl"></strong><br><small id="dp"></small></div><button class="n" id="pv" aria-label="اليوم السابق">‹</button></div>
+<div class="stp">
+<button class="n" id="nx" aria-label="اليوم التالي">›</button>
+<div><strong id="dl"></strong><br><small id="dp"></small></div>
+<button class="n" id="pv" aria-label="اليوم السابق">‹</button>
+</div>
 <div class="grp"><span>الصلوات</span><span id="g1" style="display:contents"></span></div>
 <div class="grp"><span>الورد</span><span id="g2" style="display:contents"></span></div>
 <div class="grp"><span>أعمال صالحة</span><span id="g3" style="display:contents"></span></div>
@@ -58,24 +196,48 @@
 
 <section>
 <h2>التقرير اليومي</h2>
-<div class="card"><div class="rep" id="rep"></div>
-<div class="acts"><button class="btn" id="cp">نسخ التقرير</button><button class="btn o" id="cb">🖼️ بطاقة إنجاز للمشاركة</button><button class="btn o" id="sh" hidden>مشاركة</button></div></div>
+<div class="card">
+<div class="rep" id="rep"></div>
+<div class="acts">
+<button class="btn" id="cp">نسخ التقرير</button>
+<button class="btn o" id="cb">🖼️ بطاقة إنجاز للمشاركة</button>
+<button class="btn o" id="sh" hidden>مشاركة</button>
+</div>
+</div>
 </section>
 
 <section>
 <h2>متابعة الختمة</h2>
-<div class="card"><p id="jt" style="margin:0 0 6px"></p><p id="jpos" style="margin:0 0 4px;font-weight:700;color:var(--gold)"></p><p id="jtd" class="no" style="margin:0 0 8px;font-size:14px"></p><div class="pb jbar"><i id="jp"></i></div><div class="jz" id="jz"></div><p id="jinfo" style="margin:10px 0 0;font-size:14px;color:var(--gold)"></p>
-<label style="display:flex;gap:10px;align-items:center;margin-top:12px"><span id="pgl"></span><input type="number" id="pgi" min="0" max="604" inputmode="numeric" placeholder="0" style="max-width:110px"></label></div>
+<div class="card">
+<p id="jt" style="margin:0 0 6px"></p>
+<p id="jpos" style="margin:0 0 4px;font-weight:700;color:var(--gold)"></p>
+<p id="jtd" class="no" style="margin:0 0 8px;font-size:14px"></p>
+<div class="pb jbar"><i id="jp"></i></div>
+<div class="jz" id="jz"></div>
+<p id="jinfo" style="margin:10px 0 0;font-size:14px;color:var(--gold)"></p>
+<label style="display:flex;gap:10px;align-items:center;margin-top:12px">
+<span id="pgl"></span>
+<input type="number" id="pgi" min="0" max="604" inputmode="numeric" placeholder="0" style="max-width:110px">
+</label>
+</div>
 </section>
 
 <section id="ln" hidden>
 <h2>العشر الأواخر</h2>
-<div class="card ay"><p id="qt" style="font:500 16px Tahoma,Arial,sans-serif;margin:0 0 6px"></p><div class="jz w" id="qn"></div><p style="margin-top:14px">اللهم إنك عفو تحب العفو فاعف عني</p><small class="no">دعاء ليلة القدر، والليالي الوترية أرجى</small></div>
+<div class="card ay">
+<p id="qt" style="font:500 16px Tahoma,Arial,sans-serif;margin:0 0 6px"></p>
+<div class="jz w" id="qn"></div>
+<p style="margin-top:14px">اللهم إنك عفو تحب العفو فاعف عني</p>
+<small class="no">دعاء ليلة القدر، والليالي الوترية أرجى</small>
+</div>
 </section>
 
 <section>
 <h2>إنجاز الأيام</h2>
-<div class="card"><div class="bars" id="bars"></div><small class="no">اضغط على أي يوم لفتح تقريره</small></div>
+<div class="card">
+<div class="bars" id="bars"></div>
+<small class="no">اضغط على أي يوم لفتح تقريره</small>
+</div>
 </section>
 
 <section>
@@ -90,24 +252,53 @@
 <div class="sc"><table id="tb"></table></div>
 <div class="card" id="wrep" style="margin-top:12px"></div>
 </section>
+
 <section>
 <h2>الإعدادات والنسخ الاحتياطي</h2>
-<div class="card"><label style="display:block">المحافظة (لحساب المواقيت)<select id="cty"></select></label>
+<div class="card">
+<label style="display:block">المحافظة (لحساب المواقيت)<select id="cty"></select></label>
 <button class="btn o" id="loc" style="margin-top:8px">📍 حدد محافظتي تلقائياً</button>
 <textarea id="bk" placeholder="للاسترجاع: الصق هنا النسخة الاحتياطية واضغط استرجاع" aria-label="النسخة الاحتياطية"></textarea>
-<div class="acts"><button class="btn" id="ex">نسخة احتياطية</button><button class="btn o" id="im">استرجاع</button></div></div>
+<div class="acts">
+<button class="btn" id="ex">نسخة احتياطية</button>
+<button class="btn o" id="im">استرجاع</button>
+</div>
+</div>
 </section>
 </main>
+
 <footer>تقبّل الله منا ومنكم صالح الأعمال</footer>
 
-<div class="ov" id="wl" role="dialog" aria-modal="true" aria-labelledby="wt"><div class="md">
-<svg viewBox="0 0 100 100"><defs><mask id="mk2"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="30" fill="#000"/></mask></defs><circle cx="50" cy="52" r="34" fill="#e6b655" mask="url(#mk2)"/></svg>
+<div class="ov" id="wl" role="dialog" aria-modal="true" aria-labelledby="wt">
+<div class="md">
+<svg viewBox="0 0 100 100">
+<defs>
+<mask id="mk2">
+<rect width="100" height="100" fill="#fff"/>
+<circle cx="64" cy="40" r="30" fill="#000"/>
+</mask>
+</defs>
+<circle cx="50" cy="52" r="34" fill="#e6b655" mask="url(#mk2)"/>
+</svg>
 <h3 id="wt">رمضان كريم</h3>
 <p>اكتب اسمك عشان نبدأ التحدي سوا</p>
 <input id="ni" type="text" maxlength="30" placeholder="اسمك" autocomplete="given-name">
 <button class="btn" id="go">ابدأ التحدي</button>
-</div></div>
-<div class="ov" id="cv" role="dialog" aria-modal="true" aria-label="بطاقة الإنجاز"><div class="md" style="max-height:94vh;overflow:auto"><img id="cvi" alt="بطاقة الإنجاز" style="width:100%;border-radius:14px"><p class="no" style="font-size:13px;margin:8px 0">اضغط مطوّلاً على الصورة لحفظها</p><div class="acts" style="justify-content:center"><button class="btn" id="cvs" hidden>مشاركة</button><a class="btn o" id="cvd" download="ramadan-card.png">تنزيل</a><button class="btn o" id="cvx">إغلاق</button></div></div></div>
+</div>
+</div>
+
+<div class="ov" id="cv" role="dialog" aria-modal="true" aria-label="بطاقة الإنجاز">
+<div class="md" style="max-height:94vh;overflow:auto">
+<img id="cvi" alt="بطاقة الإنجاز" style="width:100%;border-radius:14px">
+<p class="no" style="font-size:13px;margin:8px 0">اضغط مطوّلاً على الصورة لحفظها</p>
+<div class="acts" style="justify-content:center">
+<button class="btn" id="cvs" hidden>مشاركة</button>
+<a class="btn o" id="cvd" download="ramadan-card.png">تنزيل</a>
+<button class="btn o" id="cvx">إغلاق</button>
+</div>
+</div>
+</div>
+
 <div class="toast" id="ts" role="status"></div>
 
 <script src="script.js"></script>

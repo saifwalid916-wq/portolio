@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      "firestore.rules",
+      "ramadan-site.zip",
+      "report-dark.png",
+      "report-light.png",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
