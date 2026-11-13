@@ -11,7 +11,15 @@ if(typeof S.j!=='string'||S.j.length!==30)S.j='0'.repeat(30);
 if(!S.pg||typeof S.pg!=='object')S.pg={};
 if(typeof S.q!=='string'||S.q.length!==9)S.q='0'.repeat(9);
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const save=()=>{try{localStorage.setItem('rmd1',JSON.stringify(S))}catch(e){}};
+const save=()=>{
+  try {
+    localStorage.setItem('rmd1', JSON.stringify(S));
+  } catch(e) {}
+
+  if (window.saveUserData) {
+    window.saveUserData(S);
+  }
+};
 const g=(d,i)=>S.p[d*K+i]==='1';
 const cnt=(d0,d1,a,b)=>{let n=0;for(let d=d0;d<d1;d++)for(let i=a;i<b;i++)if(g(d,i))n++;return n};
 const wk=w=>[w*7,w<3?w*7+7:N];
@@ -273,3 +281,46 @@ autoDay();chips();update();cdn();setInterval(cdn,1000);
 if(S.name)setTimeout(()=>greet(false),500);else $('#wl').classList.add('s');
 
 if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+
+// ربط بيانات الموقع مع Firebase
+window.getAppState = function() {
+  return S;
+};
+
+window.applyCloudState = function(saved) {
+  if (!saved || typeof saved !== 'object') return;
+
+  Object.assign(S, saved);
+
+  if (typeof S.p !== 'string' || S.p.length !== K * N) {
+    S.p = '0'.repeat(K * N);
+  }
+
+  if (!Array.isArray(S.b)) S.b = [];
+  if (!S.z || typeof S.z !== 'object') S.z = {};
+  if (!S.pg || typeof S.pg !== 'object') S.pg = {};
+  if (typeof S.j !== 'string' || S.j.length !== 30) {
+    S.j = '0'.repeat(30);
+  }
+  if (typeof S.q !== 'string' || S.q.length !== 9) {
+    S.q = '0'.repeat(9);
+  }
+
+  ayI = Number.isInteger(S.ayl) && S.ayl >= 0 && S.ayl < AY.length
+    ? S.ayl
+    : ayI;
+
+  setTheme(S.theme || 'light');
+  chips();
+  update();
+  cdn();
+  paintSnd();
+
+  if (S.name) {
+    $('#wl').classList.remove('s');
+    greet(false);
+  } else {
+    $('#wl').classList.add('s');
+  }
+};
+

@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>مسابقة رمضان المبارك | لوحة الأدمن</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+
+  <script>
+    const savedTheme = localStorage.getItem("ramadanTheme") || "dark";
+    document.documentElement.dataset.theme = savedTheme;
+  </script>
+</head>
+
+<body>
+
+  <div class="ramadan-decoration decoration-top">☪</div>
+  <div class="ramadan-decoration decoration-left">✦</div>
+  <div class="ramadan-decoration decoration-right">✧</div>
+
+  <header class="admin-header">
+
+    <div class="admin-brand">
+      <div class="brand-moon">🌙</div>
+
+      <div>
+        <h1>مسابقة رمضان المبارك</h1>
+        <p>لوحة متابعة المشاركين</p>
+      </div>
+    </div>
+
+    <div class="admin-header-actions">
+
+      <span class="admin-welcome">مرحباً بك أيها الأدمن</span>
+
+      <button id="themeToggle" type="button">
+        ☀️ الوضع الفاتح
+      </button>
+
+    </div>
+
+  </header>
+
+  <main class="admin-container">
+
+    <section class="ramadan-hero">
+      <div class="hero-content">
+        <span class="hero-small-title">🌙 رمضان يجمعنا على الخير</span>
+
+        <h2>رحلة التغيير والإنجاز</h2>
+
+        <p>
+          تابع إنجازات المشاركين وشجعهم على الاستمرار في تحدي رمضان
+        </p>
+      </div>
+
+      <div class="hero-lanterns">
+        🏮 ✨ 🏮
+      </div>
+    </section>
+
+    <section id="login" class="login-card">
+
+      <div class="login-icon">🌙</div>
+
+      <h2>تسجيل دخول الأدمن</h2>
+
+      <p class="login-description">
+        أهلاً بك، سجّل الدخول لمتابعة المشاركين
+      </p>
+
+      <input
+        type="email"
+        id="email"
+        placeholder="البريد الإلكتروني"
+        autocomplete="username"
+      >
+
+      <input
+        type="password"
+        id="password"
+        placeholder="كلمة المرور"
+        autocomplete="current-password"
+      >
+
+      <button id="loginBtn" type="button">
+        تسجيل الدخول
+      </button>
+
+      <p id="message"></p>
+
+    </section>
+
+    <section id="dashboard" hidden>
+
+      <div class="dashboard-heading">
+        <div>
+          <span class="section-eyebrow">لوحة المتابعة</span>
+          <h2>📊 إحصائيات المشاركين</h2>
+          <p>كل إنجاز صغير يقربنا من هدفنا</p>
+        </div>
+      </div>
+
+      <div class="stats-card">
+
+        <div class="stats-icon">👥</div>
+
+        <div class="stats-information">
+          <h3>إجمالي المشاركين</h3>
+          <p id="totalUsers">جاري التحميل...</p>
+        </div>
+
+        <div class="stats-decoration">✦</div>
+
+      </div>
+
+      <section class="chart-card">
+
+        <div class="card-heading">
+          <span>📈</span>
+          <h2>نسب إنجاز المشاركين</h2>
+        </div>
+
+        <canvas id="progressChart"></canvas>
+
+      </section>
+
+      <section class="participants-card">
+
+        <div class="card-heading">
+          <span>🏆</span>
+          <h2>قائمة المشاركين</h2>
+        </div>
+
+        <div class="search-box">
+          <span>🔎</span>
+
+          <input
+            type="search"
+            id="participantSearch"
+            placeholder="ابحث عن اسم المشارك..."
+          >
+        </div>
+
+        <div id="participantsList"></div>
+
+      </section>
+
+      <button id="logoutBtn" type="button">
+        تسجيل الخروج
+      </button>
+
+    </section>
+
+  </main>
+
+  <footer class="admin-footer">
+    <div>🌙</div>
+    <p>رمضان .. فرصة جديدة لنكون أفضل</p>
+    <span>تقبل الله منا ومنكم صالح الأعمال</span>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById("themeToggle");
+
+    function updateThemeButton() {
+      const theme = document.documentElement.dataset.theme;
+
+      themeToggle.textContent =
+        theme === "dark" ? "☀️ الوضع الفاتح" : "🌙 الوضع الداكن";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = document.documentElement.dataset.theme;
+
+      const newTheme =
+        currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.dataset.theme = newTheme;
+
+      localStorage.setItem("ramadanTheme", newTheme);
+
+      updateThemeButton();
+
+      window.dispatchEvent(new Event("themeChanged"));
+    });
+
+    updateThemeButton();
+  </script>
+
+  <script type="module" src="admin.js"></script>
+
+</body>
+</html>

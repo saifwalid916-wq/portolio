@@ -1,4 +1,57 @@
-const V='rmd-v2',F=['./','index.html','style.css','script.js','sync.js','manifest.json','icon-192.png','icon-512.png'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(F)).then(()=>self.skipWaiting()))});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
-self.addEventListener('fetch',e=>{if(e.request.method!=='GET'||new URL(e.request.url).origin!==location.origin)return;e.respondWith(caches.match(e.request).then(m=>{const n=fetch(e.request).then(r=>{if(r&&r.ok){const cp=r.clone();caches.open(V).then(c=>c.put(e.request,cp))}return r}).catch(()=>m);return m||n}))});
+const V = 'rmd-v3';
+
+const F = [
+  './',
+  'index.html',
+  'style.css',
+  'script.js',
+  'sync.js',
+  'manifest.json'
+];
+
+self.addEventListener('install', (e) => {
+  e.waitUntil(
+    caches.open(V)
+      .then((cache) => cache.addAll(F))
+      .then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys()
+      .then((keys) =>
+        Promise.all(
+          keys
+            .filter((key) => key !== V)
+            .map((key) => caches.delete(key))
+        )
+      )
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener('fetch', (e) => {
+  if (
+    e.request.method !== 'GET' ||
+    new URL(e.request.url).origin !== location.origin
+  ) return;
+
+  e.respondWith(
+    caches.match(e.request).then((cached) => {
+      const network = fetch(e.request)
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(V).then((cache) =>
+              cache.put(e.request, copy)
+            );
+          }
+          return response;
+        })
+        .catch(() => cached);
+
+      return cached || network;
+    })
+  );
+});

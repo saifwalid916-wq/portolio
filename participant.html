@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تفاصيل المشارك | تحدي رمضان</title>
+
+  <link rel="stylesheet" href="participant.css">
+
+  <script>
+    const savedTheme = localStorage.getItem("ramadanTheme") || "dark";
+    document.documentElement.dataset.theme = savedTheme;
+  </script>
+</head>
+<body>
+
+  <header class="top-header">
+    <div class="header-content">
+
+      <div class="site-title">
+        <span class="moon">🌙</span>
+        <div>
+          <h1>تحدي رمضان</h1>
+          <p>معاً .. نقترب إلى الله</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="themeToggle" type="button">
+          ☀️ الوضع الفاتح
+        </button>
+
+        <a href="admin.html" class="back-button">
+          ← العودة إلى القائمة
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="participant-page">
+
+    <section class="overview-card">
+
+      <div class="participant-info">
+        <div class="avatar">👤</div>
+        <div>
+          <span>المشارك</span>
+          <h2 id="participantName">جاري تحميل البيانات...</h2>
+          <p>اليوم الحالي: <strong id="currentDay">--</strong></p>
+        </div>
+      </div>
+
+      <div class="overall-progress">
+        <div class="circle-progress" id="progressCircle">
+          <span id="overallPercentage">--%</span>
+        </div>
+        <div>
+          <h3>نسبة الإنجاز الكلية</h3>
+          <p>من أصل 435 إنجاز</p>
+          <div class="progress-track">
+            <div class="progress-fill" id="overallProgress"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-card green-stat">
+        <span class="stat-icon">📅</span>
+        <h3 id="activeDays">--</h3>
+        <p>أيام المشاركة</p>
+      </div>
+
+      <div class="stat-card blue-stat">
+        <span class="stat-icon">🏆</span>
+        <h3 id="totalCompleted">--</h3>
+        <p>إجمالي الإنجازات</p>
+      </div>
+
+    </section>
+
+    <section class="charts-grid">
+
+      <div class="chart-section">
+        <h2>📊 إنجازاتي في الأقسام</h2>
+        <canvas id="habitsChart"></canvas>
+      </div>
+
+      <div class="chart-section">
+        <h2>📈 تطوري خلال رمضان</h2>
+        <canvas id="progressChart"></canvas>
+      </div>
+
+    </section>
+
+    <section class="days-section">
+      <div class="section-heading">
+        <h2>📅 تفاصيل الأيام</h2>
+        <p>اضغط على أي يوم لعرض تفاصيل إنجازاته.</p>
+      </div>
+
+      <div id="daysList" class="days-grid"></div>
+    </section>
+
+    <section id="dayDetails" class="day-details" hidden>
+      <div class="section-heading">
+        <h2 id="detailsTitle">تفاصيل اليوم</h2>
+        <button id="closeDetails" type="button" class="back-button">
+          إغلاق ✕
+        </button>
+      </div>
+
+      <div id="detailsContent"></div>
+    </section>
+
+  </main>
+
+  <footer class="page-footer">
+    <p>🌙 تحدي رمضان — معاً نقترب إلى الله</p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById("themeToggle");
+
+    function updateThemeButton() {
+      const theme = document.documentElement.dataset.theme;
+
+      themeToggle.textContent =
+        theme === "dark" ? "☀️ الوضع الفاتح" : "🌙 الوضع الداكن";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = document.documentElement.dataset.theme;
+
+      const newTheme =
+        currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.dataset.theme = newTheme;
+      localStorage.setItem("ramadanTheme", newTheme);
+
+      updateThemeButton();
+
+      window.dispatchEvent(new Event("themeChanged"));
+    });
+
+    updateThemeButton();
+  </script>
+
+  <script type="module" src="participant.js"></script>
+
+</body>
+</html>
